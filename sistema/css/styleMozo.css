@@ -1,0 +1,145 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F3F4F6;
+}
+
+.font-display {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 2s infinite;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-switch.active {
+    background: #10B981;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active::after {
+    transform: translateX(24px);
+}
+
+/* Cards */
+.pedido-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.pedido-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pedido-card.local {
+    border-left-color: #10B981;
+}
+
+.pedido-card.delivery {
+    border-left-color: #2563EB;
+}
+
+.pedido-card.recojo {
+    border-left-color: #F59E0B;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F3F4F6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* Toast */
+.toast {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+/* Loader */
+.loader {
+    border: 3px solid #F3F4F6;
+    border-top: 3px solid #2563EB;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

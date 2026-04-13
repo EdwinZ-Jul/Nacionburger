@@ -1,0 +1,211 @@
+/* styleRegistro.css — Nación Burger Registro (Culinary Noir) */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+/* ========== LAYOUT: SPLIT SCREEN ========== */
+.register-box {
+  display: flex;
+  width: min(900px, 96vw);
+  min-height: 580px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,107,0,0.22);
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,0.06),
+    0 30px 80px rgba(0,0,0,0.6);
+}
+
+/* ======= LEFT PANEL (brand/editorial) ======= */
+.register-brand-side {
+  flex: 1;
+  background:
+    linear-gradient(160deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 100%),
+    linear-gradient(135deg, #1a0a00 0%, #2d1400 40%, #FF6B00 200%);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Decorative flame glow */
+.register-brand-side::before {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,107,0,0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.register-brand-logo {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #FF6B00;
+  letter-spacing: -0.01em;
+}
+
+.register-brand-middle { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+
+.register-brand-tagline {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #e5e2e1;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.register-brand-tagline span { color: #FF6B00; }
+
+.register-brand-sub {
+  font-size: 0.85rem;
+  color: rgba(229,226,225,0.6);
+  line-height: 1.5;
+  max-width: 260px;
+}
+
+.register-brand-footer {
+  font-size: 0.7rem;
+  color: rgba(229,226,225,0.35);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ======= RIGHT PANEL (form) ======= */
+.register-form-side {
+  width: 400px;
+  flex-shrink: 0;
+  background: #1a1918;
+  padding: 40px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.register-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e5e2e1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.register-subtitle {
+  font-size: 0.82rem;
+  color: #9a8a84;
+  margin-bottom: 24px;
+}
+
+/* ======= INPUTS ======= */
+.register-input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.register-input-box input {
+  width: 100%;
+  height: 50px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #e5e2e1;
+  padding: 16px 14px 4px 14px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.register-input-box input:focus {
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.12);
+  background: rgba(255,107,0,0.04);
+}
+
+.register-input-box label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 0.88rem;
+  color: #9a8a84;
+  pointer-events: none;
+  transition: top 0.22s ease, font-size 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.register-input-box input:focus ~ label,
+.register-input-box input:valid ~ label {
+  top: 10px;
+  font-size: 0.68rem;
+  color: #FF6B00;
+  transform: none;
+}
+
+/* Hide decorative lines — now done via border on input */
+.register-input-line { display: none !important; }
+
+/* ======= BUTTON ======= */
+.register-button {
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #FF6B00, #cc5500);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-top: 6px;
+  margin-bottom: 0;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.30);
+}
+.register-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(255,107,0,0.45);
+}
+.register-button:active { transform: translateY(0); opacity: 0.9; }
+
+/* ======= BACK LINK ======= */
+.register-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.83rem;
+  color: #9a8a84;
+  font-family: 'Inter', sans-serif;
+}
+.register-link a {
+  color: #FF6B00;
+  text-decoration: none;
+  font-weight: 600;
+}
+.register-link a:hover { text-decoration: underline; }
+
+/* ======= HIDE OLD DECORATIONS ======= */
+.register-input-check,
+.register-toggle,
+.register-light { display: none !important; }
+
+/* NOTE: .hidden class is NOT defined here — managed in styleLogin.css */
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 760px) {
+  .register-box {
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+    min-height: auto;
+  }
+  .register-brand-side { min-height: 160px; padding: 28px 24px 24px; }
+  .register-brand-tagline { font-size: 1.2rem; }
+  .register-form-side { width: 100%; padding: 28px 22px 24px; }
+}

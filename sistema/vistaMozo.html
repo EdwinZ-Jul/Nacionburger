@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mozo - Nación Burger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styleMozo.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mozo-blue': '#2563EB',
+                        'mozo-dark': '#1E293B',
+                        'success': '#10B981',
+                        'warning': '#F59E0B',
+                        'danger': '#EF4444',
+                    },
+                    fontFamily: {
+                        'display': ['Bebas Neue', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-mozo-dark text-white sticky top-0 z-40 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-mozo-blue rounded-full flex items-center justify-center">
+                    <i class="fas fa-user-tie text-white"></i>
+                </div>
+                <div>
+                    <h1 class="font-display text-2xl tracking-wider">PANEL <span class="text-mozo-blue">MOZO</span></h1>
+                    <p class="text-xs text-gray-400">Gestión de pedidos y mesas</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="cambiarVista('pedidos')" id="btn-vista-pedidos" class="px-4 py-2 rounded-lg bg-mozo-blue text-white text-sm font-medium transition-colors flex items-center gap-2">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span class="hidden sm:inline">Pedidos</span>
+                </button>
+                <button onclick="cambiarVista('mesas')" id="btn-vista-mesas" class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium transition-colors flex items-center gap-2">
+                    <i class="fas fa-chair"></i>
+                    <span class="hidden sm:inline">Mesas</span>
+                </button>
+                <button onclick="logout()" class="w-10 h-10 rounded-full bg-red-900/30 hover:bg-red-900/50 border border-red-800 flex items-center justify-center transition-colors" title="Cerrar sesión">
+                    <i class="fas fa-sign-out-alt text-red-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+
+        <!-- VISTA PEDIDOS -->
+        <div id="vista-pedidos" class="space-y-6">
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs font-semibold uppercase">Listos</p>
+                            <p class="text-2xl font-display text-gray-800" id="stat-listos">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs font-semibold uppercase">En Camino</p>
+                            <p class="text-2xl font-display text-gray-800" id="stat-camino">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-motorcycle text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs font-semibold uppercase">Local</p>
+                            <p class="text-2xl font-display text-gray-800" id="stat-local">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-utensils text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-xs font-semibold uppercase">Delivery</p>
+                            <p class="text-2xl font-display text-gray-800" id="stat-delivery">0</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-motorcycle text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex flex-wrap gap-2 items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex gap-2">
+                    <button onclick="filtrarPedidos('todos')" class="filtro-btn active px-4 py-2 rounded-lg text-sm font-medium bg-mozo-blue text-white transition-colors" data-filtro="todos">
+                        Todos
+                    </button>
+                    <button onclick="filtrarPedidos('local')" class="filtro-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-filtro="local">
+                        <i class="fas fa-utensils mr-1"></i> Local
+                    </button>
+                    <button onclick="filtrarPedidos('delivery')" class="filtro-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-filtro="delivery">
+                        <i class="fas fa-motorcycle mr-1"></i> Delivery
+                    </button>
+                    <button onclick="filtrarPedidos('recojo')" class="filtro-btn px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-filtro="recojo">
+                        <i class="fas fa-store mr-1"></i> Recojo
+                    </button>
+                </div>
+                <button onclick="cargarPedidos()" class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors" title="Actualizar">
+                    <i class="fas fa-sync-alt text-gray-600"></i>
+                </button>
+            </div>
+
+            <!-- Lista de Pedidos -->
+            <div id="container-pedidos" class="grid gap-4">
+                <div class="text-center py-12 text-gray-500">
+                    <div class="loader mx-auto mb-4"></div>
+                    <p>Cargando pedidos...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA MESAS -->
+        <div id="vista-mesas" class="hidden space-y-6">
+            
+            <!-- Header Mesas -->
+            <div class="flex items-center justify-between bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+                <div>
+                    <h2 class="font-display text-2xl text-gray-800">GESTIÓN DE MESAS</h2>
+                    <p class="text-sm text-gray-500">Activa o desactiva mesas según disponibilidad</p>
+                </div>
+                <div class="flex gap-4 text-sm">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-gray-600">Disponible</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <span class="text-gray-600">Ocupado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Mesas -->
+            <div id="grid-mesas" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                <div class="col-span-full text-center py-12 text-gray-500">
+                    <div class="loader mx-auto mb-4"></div>
+                    <p>Cargando mesas...</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script src="./js/vistaMozo.js" type="module"></script>
+</body>
+</html>

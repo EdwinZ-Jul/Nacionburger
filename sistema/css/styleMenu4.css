@@ -1,0 +1,139 @@
+/*Estilos de los productos que se cargan en el menú y la navegación de los productos*/
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-categorias {
+  display: flex;
+  overflow-x: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 2px solid #eee;
+}
+
+.categoria-btn {
+  white-space: nowrap;
+  padding: 0.6rem 1.2rem;
+  background-color: #f8f8f8;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.categoria-btn:hover {
+  background-color: #ffe082;
+  transform: scale(1.05);
+}
+
+.categoria-btn.active {
+  background-color: #ffca28;
+  color: #000;
+}
+
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.producto-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  transition: transform 0.3s;
+  text-align: center;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.producto-card h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.producto-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.producto-card span {
+  font-size: 16px;
+  color: #000;
+  font-weight: bold;
+}
+
+.producto-card .precio-promo-linea {
+  display: block;
+  font-size: 16px;
+}
+
+.producto-card .precio-promo-linea del {
+  color: #888;
+  font-weight: normal;
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.producto-card .promo-etiqueta {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #c0392b;
+  margin-top: 6px;
+}
+
+.modal-precio-anterior {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 4px;
+}
+
+/*ONOOO */
+#sugerencias {
+  position: absolute;
+  background: rgb(136, 89, 89);
+  border: 1px solid #020101;
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+  width: 250px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#sugerencias li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#sugerencias li:hover {
+  background-color: #503737;
+}
+
+.buscador {
+  position: relative;
+}

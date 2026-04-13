@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cajero - Nación Burger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/cajero.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cajero-green': '#059669',
+                        'cajero-dark': '#064E3B',
+                        'cajero-gold': '#D97706',
+                        'warning': '#F59E0B',
+                        'danger': '#DC2626',
+                    },
+                    fontFamily: {
+                        'display': ['Bebas Neue', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-cajero-dark text-white sticky top-0 z-40 shadow-xl">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-cajero-green rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-cash-register text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-display text-3xl tracking-wider text-white">CAJA <span class="text-cajero-gold">NACIÓN BURGER</span></h1>
+                    <p class="text-xs text-emerald-300 flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        Sistema de pagos activo
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-2 bg-emerald-800/50 px-4 py-2 rounded-lg border border-emerald-600/30">
+                    <i class="fas fa-user text-emerald-300"></i>
+                    <span class="text-sm text-emerald-100">Cajero: <span id="nombre-cajero" class="font-semibold">Usuario</span></span>
+                </div>
+                <button onclick="logout()" class="w-10 h-10 rounded-lg bg-red-900/30 hover:bg-red-900/50 border border-red-800 flex items-center justify-center transition-colors" title="Cerrar sesión">
+                    <i class="fas fa-sign-out-alt text-red-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
+
+        <!-- Tabs de Navegación -->
+        <div class="flex justify-center mb-8">
+            <div class="bg-white p-1.5 rounded-2xl shadow-lg border border-emerald-100 inline-flex">
+                <button onclick="cambiarTab('pendientes')" id="tab-pendientes" class="px-8 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-2 bg-cajero-green text-white shadow-md">
+                    <i class="fas fa-clock"></i>
+                    <span class="hidden sm:inline">Pagos Pendientes</span>
+                    <span class="sm:hidden">Pendientes</span>
+                    <span id="badge-pendientes" class="ml-2 bg-white text-cajero-green px-2 py-0.5 rounded-full text-xs font-bold hidden">0</span>
+                </button>
+                <button onclick="cambiarTab('realizados')" id="tab-realizados" class="px-8 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-2 text-gray-600 hover:bg-gray-50">
+                    <i class="fas fa-check-circle"></i>
+                    <span class="hidden sm:inline">Pagos Realizados</span>
+                    <span class="sm:hidden">Realizados</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- VISTA: PAGOS PENDIENTES -->
+        <div id="vista-pendientes" class="space-y-6">
+            
+            <!-- Resumen -->
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-200 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-amber-700 text-xs font-bold uppercase tracking-wider mb-1">Pendientes de Cobro</p>
+                            <p class="text-4xl font-display text-amber-800" id="total-pendientes">0</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-amber-200 flex items-center justify-center">
+                            <i class="fas fa-clock text-amber-700 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border border-emerald-200 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-emerald-700 text-xs font-bold uppercase tracking-wider mb-1">Monto Total en Caja</p>
+                            <p class="text-4xl font-display text-emerald-800" id="monto-total-pendiente">S/ 0.00</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-200 flex items-center justify-center">
+                            <i class="fas fa-coins text-emerald-700 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-blue-700 text-xs font-bold uppercase tracking-wider mb-1">Último Cobro</p>
+                            <p class="text-2xl font-display text-blue-800" id="ultimo-cobro">--:--</p>
+                            <p class="text-xs text-blue-600 mt-1" id="ultimo-monto">S/ 0.00</p>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-blue-200 flex items-center justify-center">
+                            <i class="fas fa-receipt text-blue-700 text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Pagos Pendientes -->
+            <div class="bg-white rounded-3xl shadow-xl border border-emerald-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-emerald-50/50">
+                    <h2 class="font-display text-2xl text-gray-800 flex items-center gap-2">
+                        <i class="fas fa-hand-holding-usd text-cajero-green"></i>
+                        Cola de Cobros
+                    </h2>
+                    <button onclick="cargarPagosPendientes()" class="w-10 h-10 rounded-full hover:bg-emerald-100 flex items-center justify-center transition-colors" title="Actualizar">
+                        <i class="fas fa-sync-alt text-emerald-600"></i>
+                    </button>
+                </div>
+
+                <div id="lista-pendientes" class="divide-y divide-gray-100">
+                    <!-- Se renderiza dinámicamente -->
+                    <div class="p-12 text-center text-gray-400">
+                        <div class="loader mx-auto mb-4"></div>
+                        <p>Cargando pagos pendientes...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA: PAGOS REALIZADOS -->
+        <div id="vista-realizados" class="hidden space-y-6">
+            
+            <!-- Filtros y Búsqueda -->
+            <div class="bg-white rounded-2xl p-4 shadow-lg border border-emerald-100 flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div class="flex items-center gap-2 w-full md:w-auto">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input type="text" id="buscar-pago" placeholder="Buscar por ID de pedido..." 
+                           class="w-full md:w-64 px-4 py-2 rounded-xl border border-gray-200 focus:border-cajero-green focus:ring-2 focus:ring-emerald-200 outline-none transition-all"
+                           oninput="filtrarPagosRealizados(this.value)">
+                </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="filtrarPorMetodo('todos')" class="filtro-metodo active px-4 py-2 rounded-lg text-sm font-medium bg-cajero-green text-white transition-colors" data-metodo="todos">
+                        Todos
+                    </button>
+                    <button onclick="filtrarPorMetodo('Efectivo')" class="filtro-metodo px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-metodo="Efectivo">
+                        Efectivo
+                    </button>
+                    <button onclick="filtrarPorMetodo('Tarjeta')" class="filtro-metodo px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-metodo="Tarjeta">
+                        Tarjeta
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Historial -->
+            <div class="bg-white rounded-3xl shadow-xl border border-emerald-100 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 bg-emerald-50/50">
+                    <h2 class="font-display text-2xl text-gray-800 flex items-center gap-2">
+                        <i class="fas fa-history text-cajero-green"></i>
+                        Historial de Pagos
+                    </h2>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">N° Pago</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pedido</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Método</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Monto</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-realizados" class="divide-y divide-gray-100">
+                            <!-- Se renderiza dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="empty-realizados" class="hidden p-12 text-center text-gray-400">
+                    <i class="fas fa-receipt text-4xl mb-3 opacity-30"></i>
+                    <p>No hay pagos realizados</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL DE COBRO -->
+    <div id="modal-cobro" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="cerrarModal()"></div>
+        
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-slide-in transform transition-all">
+                
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-cajero-green to-emerald-600 px-6 py-4 flex justify-between items-center">
+                    <h3 class="font-display text-2xl text-white flex items-center gap-2">
+                        <i class="fas fa-cash-register"></i>
+                        COBRO EN EFECTIVO
+                    </h3>
+                    <button onclick="cerrarModal()" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-white"></i>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="p-6 space-y-6">
+                    
+                    <!-- Total a Pagar -->
+                    <div class="text-center p-4 bg-emerald-50 rounded-2xl border-2 border-emerald-200">
+                        <p class="text-emerald-700 text-sm font-semibold uppercase tracking-wider mb-1">Total a Pagar</p>
+                        <p class="text-5xl font-display text-emerald-800 display-monto" id="modal-total">S/ 0.00</p>
+                        <p class="text-xs text-emerald-600 mt-1">Pedido #<span id="modal-pedido-id">000</span></p>
+                    </div>
+
+                    <!-- Input Monto Recibido -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-bold text-gray-700">Monto Recibido</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">S/</span>
+                            <input type="number" id="input-recibido" step="0.01" min="0"
+                                   class="input-monto w-full pl-12 pr-4 py-4 text-3xl font-bold text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-cajero-green transition-all display-monto"
+                                   placeholder="0.00"
+                                   oninput="calcularVuelto()">
+                        </div>
+                    </div>
+
+                    <!-- Vuelto -->
+                    <div id="container-vuelto" class="p-4 rounded-2xl border-2 transition-all duration-300 bg-gray-50 border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600 font-medium">Vuelto:</span>
+                            <span class="text-3xl font-display text-gray-400 display-monto" id="monto-vuelto">S/ 0.00</span>
+                        </div>
+                        <p id="mensaje-error" class="text-danger text-sm mt-2 hidden flex items-center gap-2">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Monto insuficiente
+                        </p>
+                    </div>
+
+                    <!-- Teclado Numérico Rápido -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="agregarDigito('7')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">7</button>
+                        <button onclick="agregarDigito('8')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">8</button>
+                        <button onclick="agregarDigito('9')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">9</button>
+                        <button onclick="agregarDigito('4')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">4</button>
+                        <button onclick="agregarDigito('5')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">5</button>
+                        <button onclick="agregarDigito('6')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">6</button>
+                        <button onclick="agregarDigito('1')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">1</button>
+                        <button onclick="agregarDigito('2')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">2</button>
+                        <button onclick="agregarDigito('3')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">3</button>
+                        <button onclick="agregarDigito('0')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700 col-span-2">0</button>
+                        <button onclick="agregarDigito('.')" class="tecla py-3 bg-gray-100 hover:bg-gray-200 rounded-lg font-bold text-xl text-gray-700">.</button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="limpiarInput()" class="py-3 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg font-bold transition-colors">
+                            <i class="fas fa-trash-alt mr-2"></i>Borrar
+                        </button>
+                        <button onclick="usarMontoExacto()" class="py-3 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-lg font-bold transition-colors">
+                            Exacto
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="p-6 border-t border-gray-100 bg-gray-50">
+                    <button id="btn-confirmar" onclick="confirmarPago()" disabled
+                            class="w-full py-4 bg-gray-300 text-gray-500 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 cursor-not-allowed">
+                        <i class="fas fa-check-circle"></i>
+                        Confirmar Pago
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script src="./js/cajero.js" type="module"></script>
+</body>
+</html>

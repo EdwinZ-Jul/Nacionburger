@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - Nación Burger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/historial.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-red': '#D92626',
+                        'brand-dark': '#1A1A1A',
+                        'brand-gold': '#FFB800',
+                        'status-pending': '#F59E0B',
+                        'status-preparing': '#3B82F6',
+                        'status-ready': '#10B981',
+                        'status-delivered': '#6B7280',
+                    },
+                    fontFamily: {
+                        'display': ['Bebas Neue', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-4 max-w-5xl">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button onclick="history.back()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                    </button>
+                    <div>
+                        <h1 class="font-display text-2xl text-brand-dark tracking-wide">MIS <span class="text-brand-red">PEDIDOS</span></h1>
+                        <p class="text-xs text-gray-500">Historial de compras</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-200">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-xs text-gray-600 font-medium">Cliente activo</span>
+                    </div>
+                    <button onclick="cargarPedidos()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors" title="Actualizar">
+                        <i class="fas fa-sync-alt text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-6 max-w-5xl">
+        
+        <!-- Filtros de Estado -->
+        <div class="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+            <button onclick="filtrarPedidos('todos')" class="filtro-btn active px-4 py-2 rounded-full text-sm font-medium bg-brand-red text-white transition-all whitespace-nowrap shadow-md shadow-red-200" data-filtro="todos">
+                Todos
+            </button>
+            <button onclick="filtrarPedidos('Pendiente')" class="filtro-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:border-yellow-400 hover:text-yellow-600 transition-all whitespace-nowrap" data-filtro="Pendiente">
+                <span class="w-2 h-2 bg-yellow-500 rounded-full inline-block mr-1"></span>
+                Pendientes
+            </button>
+            <button onclick="filtrarPedidos('En preparación')" class="filtro-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:border-blue-400 hover:text-blue-600 transition-all whitespace-nowrap" data-filtro="En preparación">
+                <span class="w-2 h-2 bg-blue-500 rounded-full inline-block mr-1"></span>
+                En preparación
+            </button>
+            <button onclick="filtrarPedidos('Listo')" class="filtro-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:border-green-400 hover:text-green-600 transition-all whitespace-nowrap" data-filtro="Listo">
+                <span class="w-2 h-2 bg-green-500 rounded-full inline-block mr-1"></span>
+                Listos
+            </button>
+            <button onclick="filtrarPedidos('Entregado')" class="filtro-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 border border-gray-200 hover:border-gray-400 transition-all whitespace-nowrap" data-filtro="Entregado">
+                <span class="w-2 h-2 bg-gray-500 rounded-full inline-block mr-1"></span>
+                Entregados
+            </button>
+        </div>
+
+        <!-- Lista de Pedidos -->
+        <div id="lista-pedidos" class="grid gap-4">
+            <!-- Loading State -->
+            <div class="flex flex-col items-center justify-center py-16">
+                <div class="loader mb-4"></div>
+                <p class="text-gray-500">Cargando tus pedidos...</p>
+            </div>
+        </div>
+
+        <!-- Empty State (oculto por defecto) -->
+        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-16 text-center">
+            <div class="empty-illustration mb-6">
+                <i class="fas fa-utensils text-brand-red text-5xl opacity-50"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Aún no tienes pedidos</h3>
+            <p class="text-gray-500 mb-6 max-w-sm">¡Haz tu primera orden y disfruta de nuestras hamburguesas artesanales!</p>
+            <a href="pedido.html" class="px-6 py-3 bg-brand-red text-white rounded-full font-semibold hover:bg-red-700 transition-colors shadow-lg shadow-red-200">
+                Ver menú
+            </a>
+        </div>
+
+    </main>
+
+    <!-- MODAL DETALLE DE PEDIDO -->
+    <div id="modal-detalle" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop absolute inset-0" onclick="cerrarModal()"></div>
+        
+        <div class="absolute inset-0 flex items-end sm:items-center justify-center p-0 sm:p-4">
+            <div class="bg-white w-full sm:max-w-lg sm:rounded-3xl rounded-t-3xl shadow-2xl max-h-[90vh] overflow-hidden animate-slide-up flex flex-col">
+                
+                <!-- Header Modal -->
+                <div class="bg-gradient-to-r from-brand-dark to-gray-900 px-6 py-4 flex justify-between items-center flex-shrink-0">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                            <i class="fas fa-receipt text-brand-gold"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-xl text-white">PEDIDO #<span id="modal-id">000</span></h3>
+                            <p class="text-xs text-gray-400" id="modal-fecha">--/--/---- --:--</p>
+                        </div>
+                    </div>
+                    <button onclick="cerrarModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-white"></i>
+                    </button>
+                </div>
+
+                <!-- Body Modal -->
+                <div class="flex-1 overflow-y-auto p-6">
+                    
+                    <!-- Estado -->
+                    <div class="flex justify-center mb-6">
+                        <span id="modal-estado" class="status-badge px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700 border border-yellow-300">
+                            PENDIENTE
+                        </span>
+                    </div>
+
+                    <!-- Timeline visual -->
+                    <div class="flex items-center justify-between mb-8 px-2">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-brand-red text-white flex items-center justify-center text-sm">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <span class="text-xs text-gray-500">Ordenado</span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 mx-2 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="h-full bg-brand-red w-1/4 transition-all duration-500"></div>
+                        </div>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center text-sm">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span class="text-xs text-gray-400">Entregado</span>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Productos -->
+                    <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fas fa-utensils text-brand-red"></i>
+                        Productos
+                    </h4>
+                    
+                    <div id="modal-productos" class="space-y-3 mb-6">
+                        <!-- Productos se renderizan aquí -->
+                    </div>
+
+                    <!-- Resumen -->
+                    <div class="border-t-2 border-dashed border-gray-200 pt-4 space-y-2">
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>Subtotal</span>
+                            <span id="modal-subtotal">S/ 0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>Delivery</span>
+                            <span id="modal-delivery">S/ 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                            <span class="font-bold text-gray-800 text-lg">Total</span>
+                            <span id="modal-total" class="font-display text-2xl text-brand-red">S/ 0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Modal -->
+                <div class="p-4 border-t border-gray-100 bg-gray-50 flex-shrink-0">
+                    <button onclick="cerrarModal()" class="w-full py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl font-semibold transition-colors">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script src="js/historial.js" type="module"></script>
+</body>
+</html>

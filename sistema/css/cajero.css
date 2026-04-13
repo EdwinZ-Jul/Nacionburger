@@ -1,0 +1,153 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+    min-height: 100vh;
+}
+
+.font-display {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-soft {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 2s infinite;
+}
+
+.animate-shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Cards */
+.pago-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pago-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Teclado numérico */
+.tecla {
+    transition: all 0.1s;
+    active: scale: 0.95;
+}
+
+.tecla:active {
+    transform: scale(0.95);
+    background-color: #D1D5DB;
+}
+
+/* Display de monto */
+.display-monto {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F0FDF4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #059669;
+    border-radius: 4px;
+}
+
+/* Toast */
+.toast {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+/* Loader */
+.loader {
+    border: 3px solid #E5E7EB;
+    border-top: 3px solid #059669;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Input de monto */
+.input-monto:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+
+/* Efecto de éxito */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #10B981;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}

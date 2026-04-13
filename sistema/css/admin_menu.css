@@ -1,0 +1,244 @@
+/* admin_menu.css — Culinary Noir Admin Panel */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Inter:wght@400;500;600&display=swap');
+
+/* ========== TOKENS ========== */
+:root {
+  --bg:           #131313;
+  --sidebar-bg:   #0e0e0e;
+  --surface:      #1c1b1b;
+  --surface-hi:   #252525;
+  --primary:      #FF6B00;
+  --primary-dim:  rgba(255,107,0,0.12);
+  --text:         #e5e2e1;
+  --muted:        #9a8a84;
+  --border:       rgba(255,255,255,0.06);
+  --sidebar-w:    240px;
+  --header-h:     60px;
+  --radius:       12px;
+}
+
+/* ========== RESET ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* ========== LAYOUT ========== */
+.admin-container {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: 100vh;
+  min-height: 100vh;
+}
+
+/* ========== SIDEBAR ========== */
+.admin-sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-logo {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-logo h2 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.admin-logo .logo-sub {
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.admin-nav { flex: 1; padding: 16px 12px; }
+
+.admin-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-nav ul li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.admin-nav ul li a:hover {
+  background: var(--primary-dim);
+  color: var(--text);
+}
+
+.admin-nav ul li a.active {
+  background: var(--primary-dim);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Nav icons via data-icon attribute */
+.admin-nav ul li a[data-icon]::before {
+  content: attr(data-icon);
+  font-size: 1.05rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Logout at bottom */
+.admin-nav ul li:last-child { margin-top: auto; }
+.admin-nav ul li:last-child a {
+  color: #a04040;
+}
+.admin-nav ul li:last-child a:hover {
+  background: rgba(160,64,64,0.12);
+  color: #e06060;
+}
+
+/* ========== MAIN AREA ========== */
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+/* ========== TOP HEADER ========== */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+
+.admin-header h1 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-icono {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  background: var(--surface-hi);
+}
+
+#admin-nombre {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* ========== CONTENT AREA ========== */
+#admin-contenido {
+  flex: 1;
+  padding: 24px 28px;
+}
+
+/* Shared heading style for dynamic sections */
+#admin-contenido h2 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+/* Generic table styles used by crud modules */
+#admin-contenido table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+#admin-contenido th {
+  background: var(--surface);
+  color: var(--muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+#admin-contenido td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+#admin-contenido tr:hover td {
+  background: var(--surface);
+}
+
+/* Generic button in content */
+#admin-contenido button,
+.admin-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.2s;
+}
+#admin-contenido button:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.admin-btn-primary,
+#admin-contenido button.primary {
+  background: linear-gradient(135deg, var(--primary), #cc5500);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(255,107,0,0.25);
+}
+.admin-btn-danger,
+#admin-contenido button.danger {
+  background: rgba(160,64,64,0.15);
+  color: #e06060;
+  border: 1px solid rgba(160,64,64,0.25);
+}

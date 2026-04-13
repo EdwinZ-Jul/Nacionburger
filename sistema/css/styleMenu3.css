@@ -1,0 +1,60 @@
+.usuario-logeado {
+  position: relative;
+  display: flex;
+  width: 200px;
+  height: 48px;
+  background-color: rgb(92, 80, 80);
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#nombre-usuario {
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.icono-usuario {
+  width: 42px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* CONTENEDOR USUARIO */
+#usuario-logueado {
+  position: relative;
+  cursor: pointer;
+}
+
+/* SUBMENÚ */
+#submenu-usuario {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #1e1e1e;
+  border-radius: 10px;
+  min-width: 160px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+/* ACTIVO */
+#submenu-usuario.active {
+  display: flex;
+}
+
+/* LINKS */
+#submenu-usuario a {
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+}
+
+#submenu-usuario a:hover {
+  background: rgba(255,255,255,.1);
+}
+

@@ -1,0 +1,204 @@
+/* gestiónProductos.css — Culinary Noir */
+
+/* ========== FORMULARIO NUEVO PRODUCTO ========== */
+#form-nuevo-producto {
+  max-width: 640px;
+  margin-bottom: 28px;
+  padding: 24px 24px 20px;
+  background: #1c1b1b;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+#form-nuevo-producto h3,
+#form-nuevo-producto > p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: #9a8a84;
+  margin-bottom: 16px;
+}
+
+/* ========== GRUPOS DE CAMPOS ========== */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9a8a84;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #e5e2e1;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-group select {
+  background-color: #1c1b1b;
+  color: #e5e2e1;
+  appearance: auto;
+  cursor: pointer;
+}
+.form-group select option { background: #1c1b1b; color: #e5e2e1; }
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.form-group input[type="file"] {
+  padding: 8px 10px;
+  color: #9a8a84;
+  cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.12);
+  background: rgba(255,107,0,0.04);
+}
+
+/* Select categoría */
+#categoria { cursor: pointer; }
+
+/* ========== BOTÓN AGREGAR PRODUCTO ========== */
+#btnAgregarProducto {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #FF6B00, #cc5500);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 14px rgba(255,107,0,0.28);
+  margin-top: 4px;
+}
+#btnAgregarProducto:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 20px rgba(255,107,0,0.42);
+}
+#btnAgregarProducto:active { transform: translateY(0); }
+
+/* ========== BUSCADOR ========== */
+#buscador {
+  width: 100%;
+  max-width: 380px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #e5e2e1;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  display: block;
+}
+#buscador::placeholder { color: #9a8a84; }
+#buscador:focus {
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.12);
+  background: rgba(255,107,0,0.04);
+}
+
+/* ========== TABLA DE PRODUCTOS ========== */
+#tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#tabla-productos th {
+  background: #1c1b1b;
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #9a8a84;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+#tabla-productos td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #e5e2e1;
+  vertical-align: middle;
+}
+
+#tabla-productos tbody tr {
+  transition: background 0.15s ease;
+}
+#tabla-productos tbody tr:hover td {
+  background: rgba(255,107,0,0.04);
+}
+
+/* Imágenes en tabla */
+#tabla-productos img {
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ========== BOTONES ACTUALIZAR / ELIMINAR ========== */
+.btn-actualizar,
+.btn-eliminar {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: transform 0.12s ease, opacity 0.15s ease;
+}
+
+.btn-actualizar {
+  background: rgba(245,197,24,0.15);
+  color: #f5c518;
+  border: 1px solid rgba(245,197,24,0.25);
+}
+.btn-actualizar:hover {
+  background: rgba(245,197,24,0.25);
+  transform: translateY(-1px);
+}
+
+.btn-eliminar {
+  background: rgba(224,96,96,0.12);
+  color: #e06060;
+  border: 1px solid rgba(224,96,96,0.22);
+}
+.btn-eliminar:hover {
+  background: rgba(224,96,96,0.22);
+  transform: translateY(-1px);
+}

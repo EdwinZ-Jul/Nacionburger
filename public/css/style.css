@@ -1,0 +1,490 @@
+/* ===============================
+   RESET GENERAL
+=================================*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* ===============================
+   LAYOUT FLEX (FOOTER ABAJO)
+=================================*/
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+}
+
+/* ===============================
+   NAVBAR
+=================================*/
+.navbar-nacion {
+    background-color: #000000;
+    padding: 15px 0;
+}
+
+.brand-nacion {
+    color: #ffbb33 !important;
+    font-weight: bold;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.nav-nacion {
+    color: #ffffff !important;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-nacion:hover {
+    color: #ffbb33 !important;
+    transform: translateY(-2px);
+}
+
+.btn-toggle {
+    background-color: #ffbb33;
+    border: none;
+    color: #000;
+}
+
+/* ===============================
+   FOOTER
+=================================*/
+.footer-nacion {
+    background-color: #000000;
+    padding: 25px 0;
+    font-size: 0.9rem;
+}
+
+.link-nacion {
+    color: #ffbb33;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.link-nacion:hover {
+    color: #ff8800;
+}
+
+/* ===============================
+   BOTONES PERSONALIZADOS
+=================================*/
+.btn-nacion {
+    background-color: #ffbb33;
+    color: #000;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 8px 20px;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.btn-nacion:hover {
+    background-color: #ff8800;
+    transform: scale(1.05);
+}
+
+
+/* ===============================
+   VISTA INICIO
+================================ */
+
+#inicio {
+    padding: 60px 15px;
+}
+
+/* Títulos */
+#inicio h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+#inicio h2 {
+    color: #ffbb33;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Texto */
+#inicio p {
+    line-height: 1.7;
+    color: #e0e0e0;
+}
+
+/* Separadores */
+#inicio hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ffbb33, transparent);
+    margin: 25px 0;
+}
+
+/* Imágenes */
+#inicio .img-small {
+    max-width: 320px;
+    transition: transform 0.3s ease;
+}
+
+#inicio .img-small:hover {
+    transform: scale(1.05);
+}
+
+/* Listas */
+#inicio ul li {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+}
+
+/* Espaciado entre secciones */
+#inicio .row {
+    margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #inicio h1 {
+        font-size: 2rem;
+    }
+
+    #inicio .img-small {
+        max-width: 220px;
+        margin-top: 20px;
+    }
+
+    #inicio .row {
+        text-align: center;
+    }
+}
+
+
+#servicios {
+    padding: 90px 20px;
+}
+
+#servicios h2 {
+    font-weight: 800;
+    font-size: 2.4rem;
+    color: #ffbb33;
+}
+
+.servicio-card {
+    background-color: #1f1f1f;
+    padding: 40px 30px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    height: 100%;
+}
+
+.servicio-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+}
+
+#servicios img {
+    width: 80px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.servicio-card:hover img {
+    transform: scale(1.1);
+}
+
+#servicios .titulo {
+    color: #ffbb33;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+#servicios .servicio-descripcion {
+    font-size: 0.95rem;
+    color: #dcdcdc;
+    margin-top: 15px;
+}
+
+
+/* ===============================
+   CARTA - NACION BURGER
+================================ */
+
+.productos-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.categoria-btn {
+    background: #1f1f1f;
+    border: 2px solid #ffbb33;
+    color: #ffbb33;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.categoria-btn:hover {
+    background: #ffbb33;
+    color: #000;
+}
+
+.categoria-btn.active {
+    background: #ffbb33;
+    color: #000;
+}
+
+/* Bloques */
+.categoria-bloque {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.categoria-bloque.active {
+    display: block;
+}
+
+/* Subcategorías */
+.subcategoria {
+    color: #ffbb33;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: left;
+    border-left: 5px solid #ffbb33;
+    padding-left: 10px;
+}
+
+/* Grid productos */
+.grupo-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+/* Tarjetas */
+.producto-item {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.producto-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* Imagen */
+.producto-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* Título producto */
+.producto-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffbb33;
+    margin-bottom: 10px;
+}
+
+/* Descripción */
+.producto-item p {
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+/* Precio */
+.producto-item strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.btn-pedido-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 65px;
+    height: 65px;
+    background: #ffbb33;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    text-decoration: none;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.btn-pedido-float:hover {
+    transform: scale(1.1);
+    background: #ffaa00;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+}
+
+.btn-pedido-float::after {
+    content: "Haz tu pedido";
+    position: absolute;
+    right: 80px;
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    opacity: 0;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.btn-pedido-float:hover::after {
+    opacity: 1;
+}
+
+
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===============================
+   CONTACTO - NACION BURGER
+================================ */
+
+#contacto {
+    padding: 80px 20px;
+    background: #111;
+    color: #fff;
+}
+
+#contacto h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #ffbb33;
+    margin-bottom: 50px;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Información */
+.contact-info {
+    background: #1f1f1f;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.contact-info strong {
+    color: #ffbb33;
+}
+
+/* Formulario */
+.contact-form {
+    background: #1f1f1f;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.contact-form h3 {
+    margin-bottom: 20px;
+    color: #ffbb33;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    background: #111;
+    border: 2px solid #333;
+    padding: 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #ffbb33;
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: none;
+    min-height: 120px;
+}
+
+.contact-form button {
+    background: #ffbb33;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+    background: #ffaa00;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+

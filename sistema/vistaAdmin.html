@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nación Burger — Panel de Administración">
+    <title>Admin — Nación Burger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin_menu.css">
+    <link rel="stylesheet" href="css/admin_dashboard.css">
+    <link rel="stylesheet" href="css/gestiónProductos.css">
+    <link rel="stylesheet" href="css/gestionEmpleados.css">
+    <link rel="stylesheet" href="css/historial.css">
+     <link rel="stylesheet" href="css/gestionPromociones.css">
+    <link rel="stylesheet" href="css/gestionPedidos.css">
+</head>
+<body>
+    <div class="admin-container">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>🍔 NACIÓN BURGER</h2>
+                <div class="logo-sub">Panel de Control</div>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li>
+                        <a href="#" id="btn-dashboard" data-icon="🏠">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#" id="btn-productos" data-icon="🍔">Productos</a>
+                    </li>
+                    <li>
+                        <a href="#" id="btn-usuarios" data-icon="👥">Empleados</a>
+                    </li>
+                    <li>
+                        <a href="#" id="btn-pedidos" data-icon="📋">Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="#" id="btn-promociones" data-icon="🎯">Promociones</a>
+                    </li>
+                    <li style="margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+                        <a href="#" id="btn-logout" data-icon="🚪">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- ===== MAIN ===== -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="admin-page-title">Dashboard</h1>
+                <div class="admin-info">
+                    <img src="/images/icono-admin.png" alt="Admin"
+                         class="admin-icono"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><rect width=%2240%22 height=%2240%22 fill=%22%23252525%22 rx=%2220%22/><text x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23FF6B00%22 font-size=%2218%22>A</text></svg>'">
+                    <span id="admin-nombre">Admin</span>
+                </div>
+            </header>
+
+            <!-- ===== CONTENT (loaded dynamically) ===== -->
+            <section id="admin-contenido">
+                <!-- DEFAULT: Dashboard visual -->
+                <div class="dashboard-grid" id="dashboard-default">
+                    <div class="dashboard-welcome">
+                        <h2>Bienvenido de vuelta 👋</h2>
+                        <p>Resumen general del sistema — Nación Burger</p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="stats-row">
+                        <div class="stat-card accent-orange" data-icon="💰">
+                            <span class="stat-label">Ventas del Día</span>
+                            <span class="stat-value" id="dash-ventas">—</span>
+                            <span class="stat-sub"><span id="dash-ventas-sub">Pagos confirmados hoy</span></span>
+                        </div>
+                        <div class="stat-card accent-green" data-icon="📋">
+                            <span class="stat-label">Pedidos Hoy</span>
+                            <span class="stat-value" id="dash-pedidos-cant">—</span>
+                            <span class="stat-sub"><span id="dash-pedidos-sub">vs ayer</span></span>
+                        </div>
+                        <div class="stat-card accent-blue" data-icon="👥">
+                            <span class="stat-label">Empleados (planilla)</span>
+                            <span class="stat-value" id="dash-empleados">—</span>
+                            <span class="stat-sub">Registrados en <span id="dash-empleados-sub">Trabajadores</span></span>
+                        </div>
+                        <div class="stat-card accent-red" data-icon="🍔">
+                            <span class="stat-label">Productos en menú</span>
+                            <span class="stat-value" id="dash-productos">—</span>
+                            <span class="stat-sub"><span id="dash-productos-sub">activos en carta</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Module shortcuts -->
+                    <div class="modules-row">
+                        <a href="#" class="module-card" id="shortcut-productos">
+                            <div class="module-icon">🍔</div>
+                            <div class="module-info">
+                                <span class="module-title">Gestión de Productos</span>
+                                <span class="module-desc">Agregar, editar y eliminar productos del menú</span>
+                            </div>
+                        </a>
+                        <a href="#" class="module-card" id="shortcut-empleados">
+                            <div class="module-icon">👥</div>
+                            <div class="module-info">
+                                <span class="module-title">Gestión de Empleados</span>
+                                <span class="module-desc">Administrar usuarios del sistema por rol</span>
+                            </div>
+                        </a>
+                        <a href="#" class="module-card" id="shortcut-pedidos">
+                            <div class="module-icon">📋</div>
+                            <div class="module-info">
+                                <span class="module-title">Gestión de Pedidos</span>
+                                <span class="module-desc">Ver y gestionar el historial de pedidos</span>
+                            </div>
+                        </a>
+                        <a href="#" class="module-card" id="shortcut-promociones">
+                            <div class="module-icon">🎯</div>
+                            <div class="module-info">
+                                <span class="module-title">Promociones</span>
+                                <span class="module-desc">Crear y gestionar promociones y descuentos</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Recent orders placeholder -->
+                    <div class="recent-section">
+                        <div class="section-title">Pedidos Recientes</div>
+                        <div style="background: #1c1b1b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;">
+                            <table style="width: 100%; border-collapse: collapse; text-align: left; color: #e5e2e1; font-size: 0.85rem;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2);">
+                                        <th style="padding: 14px 20px; color: #9a8a84; font-weight: 600;">ID Pedido</th>
+                                        <th style="padding: 14px 20px; color: #9a8a84; font-weight: 600;">Cliente</th>
+                                        <th style="padding: 14px 20px; color: #9a8a84; font-weight: 600;">Total</th>
+                                        <th style="padding: 14px 20px; color: #9a8a84; font-weight: 600;">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-pedidos-recientes-body">
+                                    <tr>
+                                        <td colspan="4" style="padding: 14px 20px; opacity: 0.65;">Cargando pedidos…</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div style="text-align: right; margin-top: 10px;">
+                            <a href="#" id="shortcut-pedidos-link" style="color: #FF6B00; text-decoration: none; font-size: 0.85rem; font-weight: 600; cursor: pointer;">Ver todos los pedidos →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

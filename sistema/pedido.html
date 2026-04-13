@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System NaciónBurguer🍔</title>
+    <link rel="stylesheet" href="css/styleMenu.css"> <!-- Estilos del menú sin loguearse ni productos-->
+    <link rel="stylesheet" href="css/styleMenu2.css"> <!-- Estilos del Slider-->
+    <link rel="stylesheet" href="css/styleMenu3.css"> <!-- Estilo del menú cuando el usuario se a logueado-->
+    <link rel="stylesheet" href="css/styleMenu4.css"> <!-- Estilos de los productos cargados-->
+    <link rel="stylesheet" href="css/styleMenu5.css"> <!-- Estilos del menú cuando se muestra un modal-->
+    <link rel="stylesheet" href="css/accesibilidad.css"> <!-- Accesibilidad: alto contraste + lectura de voz-->
+</head>
+
+<body>
+    <header class="navbar-pedidos">
+
+        <div class="logo">
+            <h1>Nación Burger</h1>
+        </div>
+
+        <div class="buscador">
+            <input type="text" id="inputBusqueda" placeholder="Buscar platos..." />
+            <ul id="sugerencias"></ul>
+        </div>
+
+        <div class="acciones">
+            <div class="carrito">
+                <img src="/images/carrito.png" alt="Carrito de compras" />
+                <span id="contador-carrito">0</span>
+            </div>
+
+            <button id="btn-login" class="btn-login" onclick="window.location.href='login.html'">
+                Login
+            </button>
+
+            <div class="usuario-logeado" id="usuario-logueado" style="display: none;">
+                <img src="/images/icono-usuario.png" alt="Usuario" class="icono-usuario" />
+                <span id="nombre-usuario">Usuario</span>
+                <div class="submenu-usuario" id="submenu-usuario">
+                    <a href="../sistema/miPerfil.html">Mi perfil</a>
+                    <a href="../sistema/HistorialDePedidos.html">Mis pedidos</a>
+                    <a href="#" id="cerrar-sesion">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--Carrito desplegable -->
+    <div class="carrito-container" id="carrito-container" style="display: none;">
+        <h3>Mi Carrito</h3>
+        <div id="carrito-items">
+            <p class="carrito-vacio">Tu carrito está vacío</p>
+        </div>
+        <div id="carrito-total" style="display: none;">
+            <strong>Total:</strong> S/. <span id="total-monto">0.00</span>
+        </div>
+        <div class="carrito-botones">
+            <button id="vaciar-carrito" class="btn vaciar">Vaciar carrito</button>
+            <button id="finalizar-compra" class="btn finalizar">Finalizar compra</button>
+        </div>
+    </div>
+
+    <!--Slider-->
+    <div class="slider-container">
+        <div class="slider">
+            <img src="/images/slider1.jpg" alt="Slider 1">
+            <img src="/images/slider2.jpg" alt="Slider 2">
+            <img src="/images/slider3.jpg" alt="Slider 3">
+        </div>
+    </div>
+
+    <!--Navegación para filtrar por categoría -->
+    <nav class="navbar-categorias">
+        <button class="categoria-btn active" data-categoria="hamburguesas">Hamburguesas</button>
+        <button class="categoria-btn" data-categoria="alitas,chicken">Alitas y Chicken</button>
+        <button class="categoria-btn" data-categoria="salchipapas">Salchipapas</button>
+        <button class="categoria-btn" data-categoria="combos">Combos</button>
+        <button class="categoria-btn" data-categoria="sanguches,broaster">Sánguches y Broaster</button>
+        <button class="categoria-btn" data-categoria="promos">Promos</button>
+    </nav>
+
+    <!--Aqui se cargaran los productos de mi base de datos-->
+    <section id="productos" class="productos-container"></section>
+
+    <!--Aqui se guardaran mis modales para luego mostrarlos con JS pero por ahora estarán ocultos -->
+    <!-- Modal de Producto -->
+    <div id="modalProducto" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="cerrar-modal">&times;</span>
+            <img id="modalImagen" src="" alt="Imagen del producto" class="modal-img">
+            <h2 id="modalNombre"></h2>
+            <p id="modalDescripcion"></p>
+            <p id="modalPrecioAnterior" class="modal-precio-anterior" style="display: none;"></p>
+            <p><strong>Precio:</strong> S/ <span id="modalPrecio"></span></p>
+
+            <label for="modalCantidad">Cantidad:</label>
+            <input type="number" id="modalCantidad" min="1" value="1">
+
+            <div class="modal-botones">
+                <button id="agregarCarritoBtn" class="btn agregar">Agregar al carrito</button>
+                <button id="cerrarModalBtn" class="btn cerrar">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/menu_cliente.js"></script>
+    <script src="js/carrito.js" type="module"></script>
+
+</body>
+</html>

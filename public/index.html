@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nación Burger</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--AOS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="layout">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-nacion">
+            <div class="container">
+                <a class="navbar-brand brand-nacion" href="#">Nación Burger</a>
+
+                <button class="navbar-toggler btn-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+                    ☰
+                </button>
+
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-nacion" href="#" data-vista="inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-nacion" href="#" data-vista="servicios">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-nacion" href="#" data-vista="carta">Carta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-nacion" href="#" data-vista="contacto">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app" class="flex-fill"></main>
+
+    <footer class="footer-nacion text-center">
+        © 2026 Nación Burger - Todos los derechos reservados
+        <p>Síguenos en:
+            <a href="https://www.facebook.com/NacionBurger/" style="color: #ffbb33;">Facebook</a> |
+            <a href="https://www.instagram.com/nacionburger.pe?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                class="link-nacion">Instagram</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/navCarta.js"></script>
+</body>
+
+</html>

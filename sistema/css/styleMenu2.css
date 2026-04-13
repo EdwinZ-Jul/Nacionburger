@@ -1,0 +1,32 @@
+.slider-container {
+  width: 100%;
+  max-width: 1300px;
+  height: 350px; 
+  overflow: hidden; 
+  margin: 20px auto;
+  border-radius: 10px;
+}
+
+.slider {
+  display: flex;
+  width: 100% * 3; /* 100% x cantidad de imágenes */
+  height: auto;
+  max-height: 350px;
+  object-fit: cover;
+  animation: slide 30s infinite;
+}
+
+.slider img {
+  /*width: 50%;
+  height: 50%;*/
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+/* Animación */
+@keyframes slide {
+  0%   { transform: translateX(0%); }
+  33%  { transform: translateX(-100%); }
+  66%  { transform: translateX(-200%); }
+  100% { transform: translateX(0%); }
+}

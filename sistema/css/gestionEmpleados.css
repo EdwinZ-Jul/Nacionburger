@@ -1,0 +1,289 @@
+/* gestionEmpleados.css — Culinary Noir */
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+.gestion-container {
+  padding: 0;
+  max-width: 100%;
+}
+
+/* Título de sección */
+.gestion-container h2 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e5e2e1;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+/* ========== BARRA DE ACCIONES ========== */
+.acciones-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* ========== BOTONES ========== */
+.btn-primario {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #FF6B00, #cc5500);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  margin-right: 8px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 12px rgba(255,107,0,0.25);
+}
+.btn-primario:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(255,107,0,0.4);
+}
+.btn-primario:active { transform: translateY(0); }
+
+.btn-secundario {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: rgba(255,255,255,0.05);
+  color: #9a8a84;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 9px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btn-secundario:hover {
+  background: rgba(255,107,0,0.1);
+  color: #FF6B00;
+  border-color: rgba(255,107,0,0.3);
+}
+
+/* ========== TABLA EMPLEADOS ========== */
+.tabla-empleados {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+}
+
+.tabla-empleados thead {
+  background: #1c1b1b;
+}
+
+.tabla-empleados th {
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #9a8a84;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.tabla-empleados td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #e5e2e1;
+  vertical-align: middle;
+}
+
+.tabla-empleados tbody tr {
+  transition: background 0.15s ease;
+}
+.tabla-empleados tbody tr:hover td {
+  background: rgba(255,107,0,0.04);
+}
+
+/* Mensajes de estado */
+.loading, .no-data, .error {
+  text-align: center;
+  font-style: italic;
+  color: #9a8a84;
+  padding: 24px 0 !important;
+}
+.error { color: #e06060; }
+
+/* ========== BOTONES ACCIÓN (editar / eliminar) ========== */
+.btn-editar,
+.btn-eliminar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 5px 7px;
+  border-radius: 6px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  line-height: 1;
+}
+.btn-editar  { color: #59a5ff; }
+.btn-eliminar{ color: #e06060; }
+.btn-editar:hover  { background: rgba(89,165,255,0.12); transform: scale(1.1); }
+.btn-eliminar:hover{ background: rgba(224,96,96,0.12);  transform: scale(1.1); }
+
+/* ========== MODAL ========== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #1c1b1b;
+  border: 1px solid rgba(255,107,0,0.22);
+  border-radius: 16px;
+  padding: 28px 30px;
+  width: 440px;
+  max-width: 94vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,0.06),
+    0 24px 60px rgba(0,0,0,0.7);
+}
+
+/* Scrollbar del modal */
+.modal-content::-webkit-scrollbar { width: 4px; }
+.modal-content::-webkit-scrollbar-track { background: transparent; }
+.modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+
+/* Título modal */
+.modal-content h3 {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #e5e2e1;
+  margin-bottom: 20px;
+  padding-right: 24px;
+}
+
+/* Botón cerrar X */
+.cerrar {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #9a8a84;
+  font-weight: 400;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.cerrar:hover { color: #e5e2e1; }
+
+/* ========== FORMULARIO MODAL ========== */
+#formNuevoEmpleado label {
+  display: block;
+  margin-bottom: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #9a8a84;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+#formNuevoEmpleado input[type="text"],
+#formNuevoEmpleado input[type="email"],
+#formNuevoEmpleado input[type="password"],
+#formNuevoEmpleado select {
+  width: 100%;
+  height: 44px;
+  margin-top: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #e5e2e1;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  outline: none;
+  appearance: auto;
+}
+
+#formNuevoEmpleado select {
+  background-color: #1c1b1b;
+  color: #e5e2e1;
+}
+#formNuevoEmpleado select option { background: #1c1b1b; color: #e5e2e1; }
+
+#formNuevoEmpleado input:focus,
+#formNuevoEmpleado select:focus {
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.12);
+  background: rgba(255,107,0,0.04);
+}
+
+/* Botón guardar del modal */
+#formNuevoEmpleado button.btn-primario {
+  width: 100%;
+  height: 44px;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+/* Mensaje error/éxito */
+#formMensaje {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+  color: #e06060;
+  margin-top: 8px;
+}
+
+/* ========== TABLA HORARIOS (dentro del modal) ========== */
+#tablaHorarios, .modal-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: 12px;
+}
+.modal-content table th {
+  background: #252525;
+  color: #9a8a84;
+  padding: 9px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  text-align: left;
+}
+.modal-content table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #e5e2e1;
+}
+.modal-content table button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px 6px;
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+.modal-content table button:hover { background: rgba(255,107,0,0.1); }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 700px) {
+  .tabla-empleados { font-size: 0.78rem; }
+  .tabla-empleados th, .tabla-empleados td { padding: 8px 8px; }
+  .modal-content { padding: 22px 18px; }
+}

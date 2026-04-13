@@ -1,0 +1,160 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF8F0;
+}
+
+.font-display {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Ocultar secciones */
+.section-hidden {
+    display: none !important;
+}
+
+.section-visible {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D92626;
+    border-radius: 4px;
+}
+
+/* Mapa responsive */
+.map-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Mesa seleccionada */
+.mesa-selected {
+    background-color: #D92626 !important;
+    color: white !important;
+    border-color: #D92626 !important;
+    transform: scale(1.05);
+}
+
+/* Loading spinner */
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #D92626;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Card hover effects */
+.tipo-entrega-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tipo-entrega-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(217, 38, 38, 0.15);
+}
+
+.tipo-entrega-card.active {
+    border-color: #D92626;
+    background-color: #fef2f2;
+}
+
+/* Payment method cards */
+.payment-card {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.payment-card:hover {
+    border-color: #D92626;
+}
+
+.payment-card.selected {
+    border-color: #D92626;
+    background-color: #fef2f2;
+    position: relative;
+}
+
+.payment-card.selected::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #D92626;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
