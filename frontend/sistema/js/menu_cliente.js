@@ -1,4 +1,5 @@
 // js/menu_cliente.js
+import { fetchApi } from './authGuard.js';
 
 // ─── Variables de estado de accesibilidad ─────────────────────────────────────
 let altoContrasteActivo = false;
@@ -134,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const [resProd, resPromo] = await Promise.all([
-      fetch('/api/productos'),
-      fetch('/api/promociones/activas')
+      fetchApi('/api/productos'),
+      fetchApi('/api/promociones/activas')
     ]);
     const productos = await resProd.json();
     try {
@@ -183,8 +184,8 @@ if (inputBusqueda) {
     const nombre = inputBusqueda.value.trim().toLowerCase();
     if (nombre === '') {
       const [r, rPromo] = await Promise.all([
-        fetch('/api/productos'),
-        fetch('/api/promociones/activas')
+        fetchApi('/api/productos'),
+        fetchApi('/api/promociones/activas')
       ]);
       try {
         const listaPromos = await rPromo.json();
@@ -200,7 +201,7 @@ if (inputBusqueda) {
       return;
     }
     try {
-      const r = await fetch(`/api/productos/buscar?nombre=${encodeURIComponent(nombre)}`);
+      const r = await fetchApi(`/api/productos/buscar?nombre=${encodeURIComponent(nombre)}`);
       const productos = await r.json();
       sugerencias.innerHTML = '';
       if (!productos.length) {

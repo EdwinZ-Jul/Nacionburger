@@ -14,9 +14,9 @@ app.use((req, res, next) => {
 app.use(cors());
 
 // ─── ESTÁTICOS ────────────────────────────────────────────────────────────────
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
-app.use(express.static(path.join(__dirname, '../public')));
-app.use('/sistema', express.static(path.join(__dirname, '../sistema')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../frontend/public/index.html')));
+app.use(express.static(path.join(__dirname, '../frontend/public')));
+app.use('/sistema', express.static(path.join(__dirname, '../frontend/sistema')));
 
 // ─── RUTAS ───────────────────────────────────────────────────────────────────
 

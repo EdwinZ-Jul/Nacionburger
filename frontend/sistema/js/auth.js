@@ -1,10 +1,10 @@
-import { decodeToken, isTokenExpired, redirectByRole } from './authGuard.js';
+import { decodeToken, isTokenExpired, redirectByRole, fetchApi } from './authGuard.js';
 
 // Exponer el callback globalmente para que Google pueda ejecutarlo
 window.handleCredentialResponse = async function(response) {
   try {
     // Mandamos el token de Google a nuestra nueva ruta
-    const res = await fetch('/auth/google', {
+    const res = await fetchApi('/auth/google', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential: response.credential })
@@ -44,7 +44,7 @@ document.getElementById('form-register-inner')?.addEventListener('submit', async
   const contrasena = document.getElementById('contrasena').value;
 
   try {
-    const response = await fetch('/auth/registro', {
+    const response = await fetchApi('/auth/registro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombres, apellidos, dni, telefono, email, usuario, contrasena })
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     const usuario = document.getElementById('login-usuario').value;
     const contrasena = document.getElementById('login-contrasena').value;
-    const response = await fetch('/auth/login', {
+    const response = await fetchApi('/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, contrasena })
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     recoveryEmail = document.getElementById('forgot-email').value;
 
-    await fetch('/auth/send-code', {
+    await fetchApi('/auth/send-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: recoveryEmail })
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const code = document.getElementById('forgot-code').value;
 
-    const res = await fetch('/auth/verify-code', {
+    const res = await fetchApi('/auth/verify-code', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: recoveryEmail, code })
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const contrasena = document.getElementById('new-password').value;
 
-    const res = await fetch('/auth/reset-password', {
+    const res = await fetchApi('/auth/reset-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: recoveryEmail, contrasena })

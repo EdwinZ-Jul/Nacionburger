@@ -1,10 +1,10 @@
 // js/fechtPago.js  — Capa de fetch hacia el backend (NO lógica UI)
-import { fetchWithAuth } from './authGuard.js';
+import { fetchWithAuth, fetchApi } from './authGuard.js';
 
 // ─── MESAS ────────────────────────────────────────────────────────────────────
 export async function getMesasDisponibles() {
   try {
-    const res = await fetch('/api/mesas');
+    const res = await fetchApi('/api/mesas');
     return await res.json();
   } catch (error) {
     console.error('Error getMesasDisponibles:', error);
@@ -15,7 +15,7 @@ export async function getMesasDisponibles() {
 // ─── PROVINCIAS (desde BD, ya no hardcodeado) ─────────────────────────────────
 export async function getProvincias() {
   try {
-    const res = await fetch('/api/provincias');
+    const res = await fetchApi('/api/provincias');
     if (!res.ok) throw new Error('Error al obtener provincias');
     const data = await res.json();
     // Normalizar para que el controlador de UI use .id y .nombre
@@ -29,7 +29,7 @@ export async function getProvincias() {
 // ─── DISTRITOS por PROVINCIA (desde BD) ──────────────────────────────────────
 export async function getDistritos(provinciaId) {
   try {
-    const res = await fetch(`/api/provincias/${provinciaId}/distritos`);
+    const res = await fetchApi(`/api/provincias/${provinciaId}/distritos`);
     if (!res.ok) throw new Error('Error al obtener distritos');
     const data = await res.json();
     // Normalizar — el front usa .id, .nombre y .costo_delivery

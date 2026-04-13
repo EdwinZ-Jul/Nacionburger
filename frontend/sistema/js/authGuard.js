@@ -91,6 +91,25 @@ export function logout() {
   window.location.href = "login.html";
 }
 
+// ─── BASE URL API (Render) ───────────────────────────────────────────────────
+// En Netlify / Android WebView, los fetch a '/api/...' deben ir al backend en Render.
+export const API_BASE = 'https://nacionburger.onrender.com';
+
+export function apiUrl(url) {
+  if (!url) return API_BASE;
+  // Si ya es absoluta (http/https), no la tocamos.
+  if (/^https?:\/\//i.test(url)) return url;
+  // Si es relativa al host actual, la convertimos a Render.
+  if (url.startsWith('/')) return `${API_BASE}${url}`;
+  // Si es relativa tipo 'auth/login', la tratamos como path.
+  return `${API_BASE}/${url}`;
+}
+
+// FETCH sin auth, pero apuntando a Render
+export async function fetchApi(url, options = {}) {
+  return fetch(apiUrl(url), options);
+}
+
 // FETCH CON AUTENTICACIÓN (para rutas protegidas)
 export async function fetchWithAuth(url, options = {}) {
 
@@ -108,7 +127,7 @@ export async function fetchWithAuth(url, options = {}) {
     ...(!isFormData && { "Content-Type": "application/json" })
   };
 
-  const response = await fetch(url, {
+  const response = await fetch(apiUrl(url), {
     ...options,
     headers
   });
